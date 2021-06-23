@@ -5,6 +5,10 @@ from datetime import datetime
 from app import login
 from hashlib import md5
 from flask_login import UserMixin
+import time
+
+
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
 #关注者关联表
 followers = db.Table(
@@ -24,7 +28,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
-    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow())
 
     followed = db.relationship(
 		'User',
@@ -72,7 +76,7 @@ class User(UserMixin, db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):

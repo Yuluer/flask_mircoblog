@@ -7,6 +7,8 @@ from flask_migrate import Migrate
 
 from flask_bootstrap import Bootstrap
 
+from flask_moment import Moment
+
 from logging.handlers import RotatingFileHandler
 import os
 
@@ -22,6 +24,8 @@ login = LoginManager(ath)
 login.login_view='login'
 
 bootstrap = Bootstrap(ath)
+
+monment = Moment(ath)
 
 from app import routes,models,errors#从app包中导入模块routes#将Flask类的实例 赋值给名为 app 的变量。这个实例成为app包的成员。
 
